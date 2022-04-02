@@ -26,6 +26,11 @@ namespace FightyLife
 			Velocity = dashVelocity;
 		}
 
+		public void Stop()
+		{
+			Velocity = Vector2.zero;
+		}
+
 		public void Jump()
 		{
 			Velocity = new Vector2(0, jumpSpeed);
@@ -64,14 +69,17 @@ namespace FightyLife
 			var hit = Physics2D.BoxCast(origin, col.size, 0, Vector2.down, distance, movementMask);
 
 			IsGrounded = hit;
-			
+
 			if (!hit)
 			{
 				Velocity += Physics2D.gravity * gravity;
 				return;
 			}
 
-			rigid.position -= new Vector2(0, hit.distance);
+			if (rigid.position.y - hit.point.y > 0.1f)
+			{
+				rigid.position = new Vector2(rigid.position.x, hit.point.y);
+			}
 			Velocity = new Vector2(Velocity.x, 0);
 		}
 

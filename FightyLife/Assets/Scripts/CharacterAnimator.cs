@@ -5,13 +5,15 @@ namespace FightyLife
 	public class CharacterAnimator : MonoBehaviour
 	{
 		[SerializeField] private Animator anim;
+		[SerializeField] private SpriteRenderer[] visuals;
+
 
 		private readonly int _verticalSpeed = Animator.StringToHash("VerticalSpeed");
 		private readonly int _horizontalSpeed = Animator.StringToHash("HorizontalSpeed");
 		private readonly int _attack = Animator.StringToHash("Attack");
 		private readonly int _hurt = Animator.StringToHash("Hurt");
 
-		
+
 		public void SetVerticalVelocity(float velocity)
 		{
 			anim.SetFloat(_verticalSpeed, velocity);
@@ -22,13 +24,27 @@ namespace FightyLife
 			anim.SetFloat(_horizontalSpeed, Mathf.Abs(velocity));
 		}
 
-		public void SetAttack()
+		public void FaceDirection(float velocity)
 		{
-			anim.SetTrigger(_attack);
+			foreach (var visual in visuals)
+			{
+				visual.flipX = velocity < 0;
+			}
+		}
+
+		public void SetAttack(int id)
+		{
+			anim.SetInteger(_attack, id);
+		}
+
+		public void ResetAttack()
+		{
+			anim.SetInteger(_attack, 0);
 		}
 
 		public void SetHurt()
 		{
+			ResetAttack();
 			anim.SetTrigger(_hurt);
 		}
 	}

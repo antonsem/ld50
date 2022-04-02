@@ -15,10 +15,12 @@ namespace FightyLife
 				return null;
 			}
 
-			var distance = Mathf.Abs(direction) + reach;
+			direction = Mathf.Sign(direction);
+
+			var distance = Mathf.Abs(direction) * reach;
 			var origin = (Vector2)weaponCol.transform.position + weaponCol.offset;
 
-			var hit = Physics2D.BoxCast(origin, weaponCol.size, 0, Vector2.right * Mathf.Sign(direction), distance,
+			var hit = Physics2D.BoxCast(origin, weaponCol.size, 0, Vector2.right * direction, distance,
 				mask);
 
 			if (hit && hit.transform.TryGetComponent(out IHittable breakable))
