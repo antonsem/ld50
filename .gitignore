@@ -58,3 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+FightyLife/Library/
+FightyLife/Temp/
+FightyLife/obj/
+FightyLife/Logs/
