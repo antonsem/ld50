@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1332618901637958639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5232149550180348953}
+  m_Layer: 7
+  m_Name: BloodPos_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5232149550180348953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332618901637958639}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.871, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 759498571080563515}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1493467792699628336
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,6 +63,9 @@ Transform:
   - {fileID: 1957120026291483247}
   - {fileID: 6629816364825697172}
   - {fileID: 1711551037006516697}
+  - {fileID: 454918024342573008}
+  - {fileID: 841011049699697586}
+  - {fileID: 5232149550180348953}
   m_Father: {fileID: 1810150259831767761}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119,6 +153,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5245555238700606319
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841011049699697586}
+  m_Layer: 7
+  m_Name: BloodPos_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &841011049699697586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5245555238700606319}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.67, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 759498571080563515}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6596014325151005723
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +479,14 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   visual: {fileID: 580628816293039947}
   trail: {fileID: 2534121058009164281}
+  hitPositions:
+  - {fileID: 454918024342573008}
+  - {fileID: 841011049699697586}
+  - {fileID: 5232149550180348953}
+  hit:
+  - {fileID: 8300000, guid: 556d36b1410b3d548942f9b4705afa94, type: 3}
+  - {fileID: 8300000, guid: 2d094a4fd392d46499e5bec08de17fff, type: 3}
+  death: {fileID: 8300000, guid: 38a15a2582d14fd43b858763f5669c28, type: 3}
 --- !u!114 &8300460770442464360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,7 +507,9 @@ MonoBehaviour:
   gravity: 0.25
   movementMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 449
+  landSound: {fileID: 8300000, guid: 055d07f07f9beff4a99fd4f50be0ea05, type: 3}
+  dashSound: {fileID: 8300000, guid: 054a3b04a645130408ef13c0ba0e5ab7, type: 3}
 --- !u!114 &8271656731984655225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +584,37 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &8226409637334931893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 454918024342573008}
+  m_Layer: 7
+  m_Name: BloodPos_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &454918024342573008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8226409637334931893}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.508, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 759498571080563515}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &781105648284817566
 PrefabInstance:
   m_ObjectHideFlags: 0

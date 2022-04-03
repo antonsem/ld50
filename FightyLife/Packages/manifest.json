@@ -3,6 +3,7 @@
     "com.antonsem.extratools": "https://github.com/antonsem/ExtraToolsPackage.git",
     "com.antonsem.extratools.builder": "https://github.com/antonsem/ExtraBuilderPackage.git",
     "com.unity.2d.sprite": "1.0.0",
+    "com.unity.cinemachine": "2.8.4",
     "com.unity.ide.rider": "3.0.13",
     "com.unity.render-pipelines.universal": "12.1.6",
     "com.unity.textmeshpro": "3.0.6",

@@ -31,8 +31,42 @@ Transform:
   - {fileID: 6970357869253345916}
   - {fileID: 7099970607237014971}
   - {fileID: 1937631270836879977}
+  - {fileID: 342590046729754686}
+  - {fileID: 2657484537949703185}
+  - {fileID: 8762911250288976700}
   m_Father: {fileID: 392103275226511541}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2247802232748823923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2657484537949703185}
+  m_Layer: 6
+  m_Name: BloodPos_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2657484537949703185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2247802232748823923}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.629, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1649920718014660959}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2528770119676810159
 GameObject:
@@ -118,6 +152,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4641283892888979187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 342590046729754686}
+  m_Layer: 6
+  m_Name: BloodPos_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &342590046729754686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4641283892888979187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1649920718014660959}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4672669530520645499
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,6 +299,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.25}
   m_EdgeRadius: 0
+--- !u!1 &7625895129077982771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8762911250288976700}
+  m_Layer: 6
+  m_Name: BloodPos_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8762911250288976700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7625895129077982771}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.869, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1649920718014660959}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8516789678021630580
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +390,14 @@ MonoBehaviour:
   maxHealth: 20
   trail: {fileID: 4101594344129711683}
   playerColor: {r: 0, g: 1, b: 0.65882355, a: 1}
+  hitPositions:
+  - {fileID: 342590046729754686}
+  - {fileID: 2657484537949703185}
+  - {fileID: 8762911250288976700}
+  hit:
+  - {fileID: 8300000, guid: 556d36b1410b3d548942f9b4705afa94, type: 3}
+  - {fileID: 8300000, guid: 2d094a4fd392d46499e5bec08de17fff, type: 3}
+  death: {fileID: 8300000, guid: 38a15a2582d14fd43b858763f5669c28, type: 3}
   dashCooldown: 0.35
 --- !u!114 &8025094424112920076
 MonoBehaviour:
@@ -315,7 +419,9 @@ MonoBehaviour:
   gravity: 0.25
   movementMask:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 385
+  landSound: {fileID: 8300000, guid: 055d07f07f9beff4a99fd4f50be0ea05, type: 3}
+  dashSound: {fileID: 8300000, guid: 054a3b04a645130408ef13c0ba0e5ab7, type: 3}
 --- !u!114 &898245498113464273
 MonoBehaviour:
   m_ObjectHideFlags: 0

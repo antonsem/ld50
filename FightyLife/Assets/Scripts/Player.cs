@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using ExtraTools;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,6 +15,9 @@ namespace FightyLife
 		[SerializeField] private int maxHealth;
 		[SerializeField] private TrailRenderer trail;
 		[SerializeField] private Color playerColor;
+		[SerializeField] private Transform[] hitPositions;
+		[SerializeField] private AudioClip[] hit;
+		[SerializeField] private AudioClip death;
 
 
 		[Header("Stats")]
@@ -67,13 +71,13 @@ namespace FightyLife
 		{
 			Events.EnemyDead += OnEnemyDeath;
 		}
-		
+
 		private void OnDisable()
 		{
 			Events.EnemyDead -= OnEnemyDeath;
 		}
 
-		private void OnEnemyDeath(Enemy obj)
+		private void OnEnemyDeath(Vector3 pos, int dir)
 		{
 			_health = Mathf.Clamp(_health + (_scoreKeeper.Score + 1) * 2, 0, maxHealth);
 		}
@@ -105,23 +109,22 @@ namespace FightyLife
 				return;
 			}
 
+			var attack = Random.Range(1, 4);
+
+			while (attack == _attackIndex)
+			{
+				attack = Random.Range(1, 4);
+			}
+
+			_attackIndex = attack;
+
 			var breakable = weapon.CheckForHit(movement.Velocity.x * Time.deltaTime);
-			breakable?.Hit(1);
+			breakable?.Hit(1, attack - 1, weapon.transform.position.x);
 			var hit = breakable != null;
 
 			if (hit)
 			{
 				movement.Stop();
-
-				var attack = Random.Range(1, 4);
-
-				while (attack == _attackIndex)
-				{
-					attack = Random.Range(1, 4);
-				}
-
-				_attackIndex = attack;
-				
 				animator.SetAttack(attack);
 			}
 
@@ -176,13 +179,13 @@ namespace FightyLife
 		}
 
 
-		public void Hit(int damage)
+		public void Hit(int damage, int attackArea, float xPosition)
 		{
 			if (_lastDashTime > 0)
 			{
 				_hitCount++;
 
-				if (_hitCount > 2 && Random.Range(_hitCount, _hitCount + 3.0f) < _hitCount + 1 &&
+				if (_hitCount > 1 && Random.Range(_hitCount, _hitCount + 3.0f) < _hitCount + 1 &&
 				    _breakoutCoroutine == null)
 				{
 					_breakoutCoroutine = BreakoutCoroutine(1);
@@ -194,6 +197,9 @@ namespace FightyLife
 				_hitCount = 1;
 			}
 
+			var rotation = (int)Mathf.Sign(transform.position.x - xPosition);
+			Events.Hit?.Invoke(hitPositions[attackArea].position, rotation, _hitCount);
+
 			if (_breakoutCoroutine == null)
 			{
 				exclamation.SetProgress(_hitCount / (_hitCount + 3.0f));
@@ -202,11 +208,13 @@ namespace FightyLife
 			if (--_health <= 0)
 			{
 				gameObject.SetActive(false);
-				Events.PlayerDead?.Invoke();
+				AudioPlayer.PlayOneShot(death, 0.25f, 0.25f);
+				Events.PlayerDead?.Invoke(transform.position, rotation > 0 ? 1 : -1);
 			}
 
 			_lastDashTime = Time.time + 0.1f;
 			animator.SetHurt();
+			AudioPlayer.PlayOneShot(hit.GetRandom(), 1, 0.25f, 0.5f);
 		}
 
 		public void Resurrect(int health)
@@ -215,10 +223,11 @@ namespace FightyLife
 			_health = health;
 			SetColors(playerColor);
 		}
-		
+
 		private void SetColors(Color color)
 		{
 			exclamation.SetColor(color);
+
 			for (var i = 0; i < trail.colorGradient.colorKeys.Length; i++)
 			{
 				trail.colorGradient.colorKeys[i].color = color;

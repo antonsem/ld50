@@ -19,7 +19,7 @@ namespace FightyLife
 
 		private void OnEnable()
 		{
-			OnEnemyDeath(null);
+			OnEnemyDeath(Vector3.zero, 0);
 			_enemiesToSpawn = 1;
 			Events.EnemyDead += OnEnemyDeath;
 		}
@@ -29,7 +29,7 @@ namespace FightyLife
 			Events.EnemyDead -= OnEnemyDeath;
 		}
 
-		private void OnEnemyDeath(Enemy _)
+		private void OnEnemyDeath(Vector3 pos, int dir)
 		{
 			_enemiesToSpawn += 2;
 
@@ -47,7 +47,6 @@ namespace FightyLife
 			while (_enemiesToSpawn > 0)
 			{
 				yield return StartCoroutine(SpawnCoroutine(Random.Range(1f, 2f)));
-				Debug.Log("Spawned");
 				_enemiesToSpawn--;
 			}
 

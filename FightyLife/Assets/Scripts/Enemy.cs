@@ -1,4 +1,5 @@
 using System.Collections;
+using ExtraTools;
 using UnityEngine;
 
 namespace FightyLife
@@ -18,7 +19,10 @@ namespace FightyLife
 		[SerializeField] private Gradient healthGradient;
 		[SerializeField] private SpriteRenderer visual;
 		[SerializeField] private TrailRenderer trail;
-
+		[SerializeField] private Transform[] hitPositions;
+		[SerializeField] private AudioClip[] hit;
+		[SerializeField] private AudioClip death;
+		
 		
 		private Player _player;
 		private float _lastDashTime = 0;
@@ -79,23 +83,23 @@ namespace FightyLife
 				return;
 			}
 
+			var attack = Random.Range(1, 4);
+
+			while (attack == _attackIndex)
+			{
+				attack = Random.Range(1, 4);
+			}
+
+			_attackIndex = attack;
+
 			var breakable = weapon.CheckForHit(movement.Velocity.x);
-			breakable?.Hit(1);
+			breakable?.Hit(1, attack - 1, weapon.transform.position.x);
 			var hit = breakable != null;
 
 			if (hit)
 			{
 				_lastDashTime = Time.time - 0.5f;
 				movement.Stop();
-				var attack = Random.Range(1, 4);
-
-				while (attack == _attackIndex)
-				{
-					attack = Random.Range(1, 4);
-				}
-
-				_attackIndex = attack;
-				
 				animator.SetAttack(attack);
 			}
 
@@ -188,15 +192,16 @@ namespace FightyLife
 			_breakoutCoroutine = null;
 		}
 
-		public void Hit(int damage)
+		public void Hit(int damage, int attackArea, float xPosition)
 		{
+			
 			_runTurns = 0;
 
 			if (_stunTime > 0)
 			{
 				_hitCount++;
 
-				if (Random.Range(_hitCount, _hitCount + 3.0f) < _hitCount + 1 && _breakoutCoroutine == null)
+				if (_hitCount > 1 && Random.Range(_hitCount, _hitCount + 3.0f) < _hitCount + 1 && _breakoutCoroutine == null)
 				{
 					_breakoutCoroutine = BreakoutCoroutine(1);
 					StartCoroutine(_breakoutCoroutine);
@@ -206,6 +211,9 @@ namespace FightyLife
 			{
 				_hitCount = 1;
 			}
+			
+			var rotation = (int)Mathf.Sign(transform.position.x - xPosition);
+			Events.Hit?.Invoke(hitPositions[attackArea].position, rotation, _hitCount);
 
 			if (_breakoutCoroutine == null)
 			{
@@ -217,11 +225,13 @@ namespace FightyLife
 
 			if (--health <= 0)
 			{
-				Events.EnemyDead?.Invoke(this);
+				AudioPlayer.PlayOneShot(death, 0.25f, 0.25f);
+				Events.EnemyDead?.Invoke(transform.position, rotation);
 			}
 
 			var color = healthGradient.Evaluate((float)health / _fullHealth);
 			SetColors(color);
+			AudioPlayer.PlayOneShot(hit.GetRandom(), 1, 0.25f, 0.5f);
 
 			gameObject.SetActive(health > 0);
 		}
@@ -230,6 +240,7 @@ namespace FightyLife
 		{
 			exclamation.SetColor(color);
 			visual.color = color;
+
 			for (var i = 0; i < trail.colorGradient.colorKeys.Length; i++)
 			{
 				trail.colorGradient.colorKeys[i].color = color;
@@ -247,7 +258,7 @@ namespace FightyLife
 			_runTurns = 0;
 			_lastDashTime = Time.time;
 			_canHit = true;
-			
+
 			var color = healthGradient.Evaluate((float)health / _fullHealth);
 			SetColors(color);
 		}

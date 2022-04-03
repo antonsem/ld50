@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ExtraTools;
+using UnityEngine;
 
 namespace FightyLife
 {
@@ -11,6 +12,8 @@ namespace FightyLife
 		[SerializeField, Range(0, 1)] private float drag = 0.8f;
 		[SerializeField] private float gravity = 1;
 		[SerializeField] private LayerMask movementMask;
+		[SerializeField] private AudioClip landSound;
+		[SerializeField] private AudioClip dashSound;
 
 		public Vector2 Velocity
 		{
@@ -24,6 +27,11 @@ namespace FightyLife
 		{
 			var dashVelocity = new Vector2(Mathf.Sign(dir) * dashSpeed, 0);
 			Velocity = dashVelocity;
+
+			if (dashSound)
+			{
+				AudioPlayer.PlayOneShot(dashSound, 0.05f, 0.25f, 0.25f);
+			}
 		}
 
 		public void Stop()
@@ -68,6 +76,11 @@ namespace FightyLife
 
 			var hit = Physics2D.BoxCast(origin, col.size, 0, Vector2.down, distance, movementMask);
 
+			if (!IsGrounded && hit && landSound && vVelocity < -0.1f)
+			{
+				AudioPlayer.PlayOneShot(landSound, 0.1f, 0.25f, 0.15f);
+			}
+			
 			IsGrounded = hit;
 
 			if (!hit)

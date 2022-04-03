@@ -17,10 +17,9 @@ namespace FightyLife
 			Events.EnemyDead -= OnEnemyDeath;
 		}
 
-		private void OnEnemyDeath(Enemy obj)
+		private void OnEnemyDeath(Vector3 pos, int dir)
 		{
 			Score++;
-			Debug.Log($"Score: {Score.ToString()}");
 		}
 	}
 }

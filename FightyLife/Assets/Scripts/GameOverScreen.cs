@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace FightyLife
 {
@@ -9,17 +8,22 @@ namespace FightyLife
 	{
 		[SerializeField] private Canvas canvas;
 		[SerializeField] private TextMeshProUGUI scoreText;
-		[SerializeField] private Button restartButton;
 		[SerializeField] private ScoreKeeper scoreKeeper;
+		[SerializeField] private float delay = 1;
+		[SerializeField] private GameObject keysObject;
+		[SerializeField] private TutorialScreen tutorialScreen;
+		
+
+		private float _delayTime = 0;
 		
 		private void Awake()
 		{
 			canvas.enabled = false;
-			restartButton.onClick.AddListener(OnRestart);
 		}
 
 		private void OnEnable()
 		{
+			keysObject.SetActive(false);
 			Events.PlayerDead += OnPlayerDeath;
 		}
 		
@@ -28,15 +32,54 @@ namespace FightyLife
 			Events.PlayerDead -= OnPlayerDeath;
 		}
 
-		private void OnPlayerDeath()
+		private void OnPlayerDeath(Vector3 pos, int dir)
 		{
-			scoreText.text = $"Score: {scoreKeeper.Score}";
+			scoreText.text = $"Invaders killed: {scoreKeeper.Score}";
+			Set(delay);
+		}
+
+		private void Set(float countdown = 0.1f)
+		{
+			_delayTime = countdown;
+			keysObject.SetActive(false);
 			canvas.enabled = true;
 		}
 
 		private static void OnRestart()
 		{
 			SceneManager.LoadScene("Main");
+		}
+
+		private void Update()
+		{
+			if (!canvas.enabled)
+			{
+				return;
+			}
+
+			if (_delayTime > 0)
+			{
+				_delayTime -= Time.deltaTime;
+				return;
+			}
+			
+			keysObject.SetActive(true);
+
+			if (Input.GetKeyDown(KeyCode.RightArrow))
+			{
+				OnRestart();
+			}
+
+			if (Input.GetKeyDown(KeyCode.UpArrow))
+			{
+				tutorialScreen.Set(() => Set());
+				canvas.enabled = false;
+			}
+			
+			if (Input.GetKeyDown(KeyCode.LeftArrow))
+			{
+				SceneManager.LoadScene("Menu");
+			}
 		}
 	}
 }
