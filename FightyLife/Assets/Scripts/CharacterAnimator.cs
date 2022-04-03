@@ -15,6 +15,14 @@ namespace FightyLife
 		private readonly int _dead = Animator.StringToHash("Dead");
 
 
+		public void SetIdle()
+		{
+			SetVerticalVelocity(0);
+			SetHorizontalVelocity(0);
+			ResetAttack();
+			ResetHurt();
+		}
+		
 		public void SetVerticalVelocity(float velocity)
 		{
 			anim.SetFloat(_verticalSpeed, velocity);
@@ -47,6 +55,11 @@ namespace FightyLife
 		{
 			ResetAttack();
 			anim.SetTrigger(_hurt);
+		}
+
+		public void ResetHurt()
+		{
+			anim.ResetTrigger(_hurt);
 		}
 
 		public void SetDeath()

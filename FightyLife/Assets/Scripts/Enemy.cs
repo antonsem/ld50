@@ -23,8 +23,8 @@ namespace FightyLife
 		[SerializeField] private Transform[] hitPositions;
 		[SerializeField] private AudioClip[] hit;
 		[SerializeField] private AudioClip death;
-		
-		
+
+
 		private Player _player;
 		private float _lastDashTime = 0;
 		private float _stunTime = 0;
@@ -40,11 +40,6 @@ namespace FightyLife
 			Events.PlayerDead += OnPlayerDeath;
 		}
 
-		private void OnPlayerDeath(Vector3 arg1, int arg2)
-		{
-			enabled = false;
-		}
-
 		private void OnDisable()
 		{
 			Events.PlayerDead -= OnPlayerDeath;
@@ -56,6 +51,12 @@ namespace FightyLife
 			}
 
 			exclamation.SetProgress(0);
+		}
+
+		private void OnPlayerDeath(Vector3 arg1, int arg2)
+		{
+			animator.SetIdle();
+			enabled = false;
 		}
 
 		private void Start()
@@ -213,7 +214,8 @@ namespace FightyLife
 			{
 				_hitCount++;
 
-				if (_hitCount > 1 && Random.Range(_hitCount, _hitCount + 3.0f) < _hitCount + 1 && _breakoutCoroutine == null)
+				if (_hitCount > 1 && Random.Range(_hitCount, _hitCount + 3.0f) < _hitCount + 1 &&
+				    _breakoutCoroutine == null)
 				{
 					_breakoutCoroutine = BreakoutCoroutine(1);
 					StartCoroutine(_breakoutCoroutine);
@@ -223,7 +225,7 @@ namespace FightyLife
 			{
 				_hitCount = 1;
 			}
-			
+
 			var rotation = (int)Mathf.Sign(transform.position.x - xPosition);
 			Events.Hit?.Invoke(hitPositions[attackArea].position, rotation, _hitCount);
 

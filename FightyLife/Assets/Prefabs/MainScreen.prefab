@@ -698,24 +698,27 @@ MonoBehaviour:
   creditsScreen: {fileID: 0}
   keys: {fileID: 2052032854636198684}
   motivationalLines:
-  - The tyrant dies and his rule is over, the martyr dies and his rule begins.
+  - The tyrant <color=orange>dies</color> and his rule is over, the martyr <color=orange>dies</color>
+    and his rule begins.
   - You will <color=orange>die</color>. Make it count.
-  - 'In every battle there comes a time when both sides consider themselves beaten,
-    then he who continues the attack wins. '
-  - 'We may stumble and fall but shall rise again; it should be enough if we did
-    not run away from the battle. '
-  - 'The battle of getting better is never ending. '
-  - You know, I've never actually really believed that death is inevitable. I just
-    think it's a rumor.
-  - Of course, we avoid death. To know something is inevitable is one thing. To accept,
-    to truly feel it... that's different.
-  - Death and taxes are inevitable.
-  - If death is inevitable, one should try to die well.
-  - Why worry one's head over a thing that is inevitable? Why die before one's death?
-  - I expect this is what death is like when you meet it. Sort of wildly unfair but
-    inevitable.
-  - She now knew her death was inevitable, and with that acceptance came liberation.
-    The courage of the condemned.
+  - In every battle there comes a time when both sides consider themselves beaten,
+    then he who <color=orange>continues</color> the attack wins.
+  - We may <color=orange>stumble and fall</color> but shall <color=orange>rise</color>
+    again; it should be enough if we <color=orange>did not run away</color> from
+    the battle.
+  - 'The battle of getting better is <color=orange>never ending</color>. '
+  - You know, I've never actually really believed that <color=orange>death is inevitable</color>.
+    I just think it's a <color=orange>rumor</color>.
+  - Of course, we avoid <color=orange>death</color>. To know something is <color=orange>inevitable</color>
+    is one thing. To accept, to truly feel it... that's different.
+  - <color=orange>Death</color> and taxes are <color=orange>inevitable</color>.
+  - If <color=orange>death is inevitable</color>, one should try to die well.
+  - Why worry one's head over a thing that is <color=orange>inevitable</color>? Why
+    die before one's <color=orange>death</color>?
+  - I expect this is what <color=orange>death</color> is like when you meet it. Sort
+    of wildly unfair but <color=orange>inevitable</color>.
+  - She now knew her <color=orange>death was inevitable</color>, and with that acceptance
+    came liberation. The courage of the condemned.
 --- !u!1 &2052032854409249997
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,8 +920,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You know, I've never actually really believed that death is inevitable.
-    I just think it's a rumor.
+  m_text: You will <color=orange>die</color>. Make it count.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 39a094fbfd707694e8222cb23ea9998e, type: 2}
   m_sharedMaterial: {fileID: -9134107356829264916, guid: 39a094fbfd707694e8222cb23ea9998e, type: 2}

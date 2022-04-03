@@ -14,15 +14,21 @@ namespace FightyLife
 		[SerializeField] private GameObject keys;
 		[SerializeField] private string[] motivationalLines;
 
-
 		private float _delayTime = 0;
+		private bool _firstStart = false;
 
 		private void Set()
 		{
 			_delayTime = 0.1f;
-			motivation.text = motivationalLines.GetRandom();
+
+			if (!_firstStart)
+			{
+				motivation.text = motivationalLines.GetRandom();
+			}
+
 			keys.SetActive(false);
 			canvas.enabled = true;
+			_firstStart = true;
 		}
 
 		private void Update()

@@ -445,7 +445,7 @@ MonoBehaviour:
   visibleObjects:
     serializedVersion: 2
     m_Bits: 193
-  visionDistance: 10
+  visionDistance: 20
   health: 5
   runFromBreakoutChance: 0.25
   healthGradient:

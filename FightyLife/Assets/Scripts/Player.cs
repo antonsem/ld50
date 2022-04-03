@@ -211,6 +211,7 @@ namespace FightyLife
 				AudioPlayer.PlayOneShot(death, 0.25f, 0.25f);
 				animator.SetDeath();
 				Events.PlayerDead?.Invoke(transform.position, rotation > 0 ? 1 : -1);
+				enabled = false;
 			}
 
 			_lastDashTime = Time.time + 0.1f;
@@ -218,8 +219,9 @@ namespace FightyLife
 			AudioPlayer.PlayOneShot(hit.GetRandom(), 1, 0.25f, 0.5f);
 		}
 
-		public void Resurrect(int health)
+		private void Resurrect(int health)
 		{
+			enabled = true;
 			maxHealth = health;
 			_health = health;
 			SetColors(playerColor);
