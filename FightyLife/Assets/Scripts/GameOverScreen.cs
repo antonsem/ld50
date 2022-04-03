@@ -40,13 +40,13 @@ namespace FightyLife
 		private void OnPlayerDeath(Vector3 pos, int dir)
 		{
 			scoreText.text = $"Invaders killed: {scoreKeeper.Score}";
-			motivation.text = motivationalLines.GetRandom();
 			StartCoroutine(DelayEnablingCoroutine());
 		}
 
 		private void Set(float countdown = 0.1f)
 		{
 			_delayTime = countdown;
+			motivation.text = motivationalLines.GetRandom();
 			keysObject.SetActive(false);
 			canvas.enabled = true;
 		}

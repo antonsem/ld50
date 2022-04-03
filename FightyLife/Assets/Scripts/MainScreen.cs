@@ -15,7 +15,7 @@ namespace FightyLife
 		[SerializeField] private string[] motivationalLines;
 
 		private float _delayTime = 0;
-		private bool _firstStart = false;
+		private bool _firstStart = true;
 
 		private void Set()
 		{
@@ -28,7 +28,7 @@ namespace FightyLife
 
 			keys.SetActive(false);
 			canvas.enabled = true;
-			_firstStart = true;
+			_firstStart = false;
 		}
 
 		private void Update()
