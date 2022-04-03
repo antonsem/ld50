@@ -113,6 +113,7 @@ namespace ExtraTools
 		/// Plays a clip using an individual audio source. Creates one if all sources are currently busy
 		/// </summary>
 		/// <param name="clip">Clip to play</param>
+		/// <param name="volume">volume of the audio source</param>
 		/// <param name="minPitch">Minimum pitch</param>
 		/// <param name="maxPitch">Maximum pitch</param>
 		public static void PlayOneShot(AudioClip clip, float volume = 1, float minPitch = 0, float maxPitch = 0)
@@ -210,6 +211,12 @@ namespace ExtraTools
 			CoroutineStarter.Get.StartCoroutine(_activeCoroutines[volumeLabel]);
 		}
 
+		private static void ToggleVolume()
+		{
+			_mixer.GetFloat("SFXVolume", out float volume);
+			SetVolume("SFXVolume", Mathf.Approximately(volume, _maxVolume) ? 0 : 1, true);
+		}
+		
 		/// <summary>
 		/// Sets the volume gradually
 		/// </summary>
@@ -231,5 +238,17 @@ namespace ExtraTools
 			_activeCoroutines.Remove(volumeLabel);
 			callback?.Invoke();
 		}
+
+		#region DashFight
+
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.M))
+			{
+				ToggleVolume();
+			}
+		}
+
+		#endregion
 	}
 }
