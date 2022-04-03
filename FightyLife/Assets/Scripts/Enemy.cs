@@ -1,6 +1,7 @@
 using System.Collections;
 using ExtraTools;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace FightyLife
 {
@@ -34,8 +35,20 @@ namespace FightyLife
 		private int _attackIndex = 0;
 		private IEnumerator _breakoutCoroutine;
 
+		private void OnEnable()
+		{
+			Events.PlayerDead += OnPlayerDeath;
+		}
+
+		private void OnPlayerDeath(Vector3 arg1, int arg2)
+		{
+			enabled = false;
+		}
+
 		private void OnDisable()
 		{
+			Events.PlayerDead -= OnPlayerDeath;
+
 			if (_breakoutCoroutine != null)
 			{
 				StopCoroutine(_breakoutCoroutine);
@@ -94,16 +107,16 @@ namespace FightyLife
 
 			var breakable = weapon.CheckForHit(movement.Velocity.x);
 			breakable?.Hit(1, attack - 1, weapon.transform.position.x);
-			var hit = breakable != null;
+			var didHit = breakable != null;
 
-			if (hit)
+			if (didHit)
 			{
 				_lastDashTime = Time.time - 0.5f;
 				movement.Stop();
 				animator.SetAttack(attack);
 			}
 
-			_canHit = !hit;
+			_canHit = !didHit;
 		}
 
 		private void Dash()
@@ -153,19 +166,19 @@ namespace FightyLife
 			var eyesPosition = eyes.position;
 			var rayDirection = (_player.transform.position - eyesPosition).normalized;
 
-			var hit = Physics2D.Raycast(eyesPosition, rayDirection, visionDistance, visibleObjects);
+			var gotHit = Physics2D.Raycast(eyesPosition, rayDirection, visionDistance, visibleObjects);
 
-			if (!hit)
+			if (!gotHit)
 			{
 				return dir;
 			}
 
-			if (hit.transform.gameObject.layer == _player.gameObject.layer)
+			if (gotHit.transform.gameObject.layer == _player.gameObject.layer)
 			{
 				return _player.transform.position - transform.position;
 			}
 
-			if (hit.distance < 3 && movement.IsGrounded)
+			if (gotHit.distance < 3 && movement.IsGrounded)
 			{
 				return Vector2.up;
 			}
@@ -194,7 +207,6 @@ namespace FightyLife
 
 		public void Hit(int damage, int attackArea, float xPosition)
 		{
-			
 			_runTurns = 0;
 
 			if (_stunTime > 0)

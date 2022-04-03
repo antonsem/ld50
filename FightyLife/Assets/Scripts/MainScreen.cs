@@ -1,3 +1,5 @@
+using ExtraTools;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,16 +8,19 @@ namespace FightyLife
 	public class MainScreen : MonoBehaviour
 	{
 		[SerializeField] private Canvas canvas;
+		[SerializeField] private TextMeshProUGUI motivation;
 		[SerializeField] private TutorialScreen tutorialScreen;
 		[SerializeField] private CreditsScreen creditsScreen;
 		[SerializeField] private GameObject keys;
-		
+		[SerializeField] private string[] motivationalLines;
+
 
 		private float _delayTime = 0;
 
 		private void Set()
 		{
 			_delayTime = 0.1f;
+			motivation.text = motivationalLines.GetRandom();
 			keys.SetActive(false);
 			canvas.enabled = true;
 		}

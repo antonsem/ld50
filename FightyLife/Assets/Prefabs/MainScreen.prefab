@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.98039216}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -558,8 +558,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 350, y: -225}
-  m_SizeDelta: {x: 600, y: 300}
+  m_AnchoredPosition: {x: 350, y: -200}
+  m_SizeDelta: {x: 600, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2052032854124400508
 CanvasRenderer:
@@ -625,7 +625,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052032854278916591}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -693,9 +693,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 2052032854278916588}
+  motivation: {fileID: 2052032854561363172}
   tutorialScreen: {fileID: 0}
   creditsScreen: {fileID: 0}
   keys: {fileID: 2052032854636198684}
+  motivationalLines:
+  - The tyrant dies and his rule is over, the martyr dies and his rule begins.
+  - You will <color=orange>die</color>. Make it count.
+  - 'In every battle there comes a time when both sides consider themselves beaten,
+    then he who continues the attack wins. '
+  - 'We may stumble and fall but shall rise again; it should be enough if we did
+    not run away from the battle. '
+  - 'The battle of getting better is never ending. '
+  - You know, I've never actually really believed that death is inevitable. I just
+    think it's a rumor.
+  - Of course, we avoid death. To know something is inevitable is one thing. To accept,
+    to truly feel it... that's different.
+  - Death and taxes are inevitable.
+  - If death is inevitable, one should try to die well.
+  - Why worry one's head over a thing that is inevitable? Why die before one's death?
+  - I expect this is what death is like when you meet it. Sort of wildly unfair but
+    inevitable.
+  - She now knew her death was inevitable, and with that acceptance came liberation.
+    The courage of the condemned.
 --- !u!1 &2052032854409249997
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,9 +917,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You will <color=orange>die</color>.
-
-    Make it count.'
+  m_text: You know, I've never actually really believed that death is inevitable.
+    I just think it's a rumor.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 39a094fbfd707694e8222cb23ea9998e, type: 2}
   m_sharedMaterial: {fileID: -9134107356829264916, guid: 39a094fbfd707694e8222cb23ea9998e, type: 2}
@@ -926,10 +945,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
+  m_fontSize: 72
   m_fontSizeBase: 60
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -1083,7 +1102,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -170, y: -225}
+  m_AnchoredPosition: {x: -170, y: -200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2052032854960674194

@@ -79,6 +79,7 @@ namespace FightyLife
 
 		private void OnEnemyDeath(Vector3 pos, int dir)
 		{
+			_lastDashTime = 0;
 			_health = Mathf.Clamp(_health + (_scoreKeeper.Score + 1) * 2, 0, maxHealth);
 		}
 
@@ -207,8 +208,8 @@ namespace FightyLife
 
 			if (--_health <= 0)
 			{
-				gameObject.SetActive(false);
 				AudioPlayer.PlayOneShot(death, 0.25f, 0.25f);
+				animator.SetDeath();
 				Events.PlayerDead?.Invoke(transform.position, rotation > 0 ? 1 : -1);
 			}
 

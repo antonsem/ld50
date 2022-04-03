@@ -1,3 +1,5 @@
+using System.Collections;
+using ExtraTools;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,14 +10,17 @@ namespace FightyLife
 	{
 		[SerializeField] private Canvas canvas;
 		[SerializeField] private TextMeshProUGUI scoreText;
+		[SerializeField] private TextMeshProUGUI motivation;
 		[SerializeField] private ScoreKeeper scoreKeeper;
 		[SerializeField] private float delay = 1;
+		[SerializeField] private float delayAfterDeath = 3;
 		[SerializeField] private GameObject keysObject;
 		[SerializeField] private TutorialScreen tutorialScreen;
-		
+		[SerializeField] private string[] motivationalLines;
+
 
 		private float _delayTime = 0;
-		
+
 		private void Awake()
 		{
 			canvas.enabled = false;
@@ -26,7 +31,7 @@ namespace FightyLife
 			keysObject.SetActive(false);
 			Events.PlayerDead += OnPlayerDeath;
 		}
-		
+
 		private void OnDisable()
 		{
 			Events.PlayerDead -= OnPlayerDeath;
@@ -35,7 +40,8 @@ namespace FightyLife
 		private void OnPlayerDeath(Vector3 pos, int dir)
 		{
 			scoreText.text = $"Invaders killed: {scoreKeeper.Score}";
-			Set(delay);
+			motivation.text = motivationalLines.GetRandom();
+			StartCoroutine(DelayEnablingCoroutine());
 		}
 
 		private void Set(float countdown = 0.1f)
@@ -62,7 +68,7 @@ namespace FightyLife
 				_delayTime -= Time.deltaTime;
 				return;
 			}
-			
+
 			keysObject.SetActive(true);
 
 			if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -75,11 +81,24 @@ namespace FightyLife
 				tutorialScreen.Set(() => Set());
 				canvas.enabled = false;
 			}
-			
+
 			if (Input.GetKeyDown(KeyCode.LeftArrow))
 			{
 				SceneManager.LoadScene("Menu");
 			}
+		}
+
+		private IEnumerator DelayEnablingCoroutine()
+		{
+			var t = delayAfterDeath;
+
+			while (t > 0)
+			{
+				t -= Time.deltaTime;
+				yield return null;
+			}
+
+			Set(delay);
 		}
 	}
 }

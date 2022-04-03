@@ -1218,7 +1218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.88235295}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -2508,6 +2508,7 @@ Transform:
   - {fileID: 1425670074}
   - {fileID: 99884408}
   - {fileID: 1263535486}
+  - {fileID: 1283468018}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3414,10 +3415,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1200740799}
   scoreText: {fileID: 1453819063}
+  motivation: {fileID: 2053213693}
   scoreKeeper: {fileID: 1340026943}
   delay: 1
+  delayAfterDeath: 6
   keysObject: {fileID: 1563257679}
   tutorialScreen: {fileID: 57242902}
+  motivationalLines:
+  - Your death was inevitable. Theirs, not so much
+  - Every man dies. Not every man truly lives
+  - It is not length of life, but depth of life.
+  - A man with outward courage dares to die; a man with inner courage dares to live.
+  - No one is actually dead until the ripples they cause in the world die away.
+  - He who is not busy being born is busy dying.
+  - Mostly it is loss which teaches us about the worth of things.
+  - As a well spent day brings happy sleep, so life well used brings happy death.
+  - Our dead are never dead to us, until we have forgotten them.
+  - "Death is a challenge. It tells us not to waste time\u2026"
+  - Man cannot possess anything as long as he fears death. But to him who does not
+    fear it, everything belongs.
+  - Everybody wants to go to heaven, but nobody wants to die.
+  - It matters not how a man dies, but how he lives. The act of dying is not of importance,
+    it lasts so short a time.
+  - Do not fear death so much but rather the inadequate life.
+  - Neither fire nor wind, birth nor death can erase our good deeds.
+  - "Everyone dies eventually, whether they have power or not. That\u2019s why you
+    need to think about what you\u2019ll accomplish while you\u2019re alive."
+  - Death never takes the wise man by surprise, he is always ready to go.
+  - Death is nothing, but to live defeated is to die every day.
+  - Cowards die many times before their deaths; The valiant never taste of death
+    but once.
+  - "No one really knows why they are alive until they know what they\u2019d die
+    for."
+  - "If you\u2019re not ready to die for it, take the word \u201Cfreedom\u201D out
+    of your vocabulary."
+  - The fear of death follows from the fear of life. A man who lives fully is prepared
+    to die at any time.
 --- !u!1 &1246138305
 GameObject:
   m_ObjectHideFlags: 0
@@ -3811,8 +3844,6 @@ MonoBehaviour:
   maxLerp: 5
   zoomOutSpeed: 0.5
   lerpStep: 0.15
-  xRange: 5
-  minY: 1.25
 --- !u!114 &1281567516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3830,6 +3861,53 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 144656312}
   m_ConfineScreenEdges: 1
   m_Damping: 10
+--- !u!1 &1283468017
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1283468018}
+  - component: {fileID: 1283468019}
+  m_Layer: 0
+  m_Name: TimeScaler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1283468018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283468017}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 883752886}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1283468019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283468017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb43c107ca2044a5ba91ed31dc2451af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slow: 0.25
+  slowIncrement: 0.5
+  speedUpTime: 0.25
 --- !u!1 &1331074206
 GameObject:
   m_ObjectHideFlags: 0
@@ -6791,6 +6869,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1468519957527442735, guid: e94dc23946680dc489812323169d584d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ed1d031b73d33e4469ea11f8eeb5d489, type: 3}
     - target: {fileID: 1468519957527442735, guid: e94dc23946680dc489812323169d584d, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

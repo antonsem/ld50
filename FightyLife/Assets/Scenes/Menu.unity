@@ -3862,10 +3862,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 208998771}
     m_Modifications:
-    - target: {fileID: 2052032853701721597, guid: 2a9a70334aa6c6141ade40d52a4333e5, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2052032854278916499, guid: 2a9a70334aa6c6141ade40d52a4333e5, type: 3}
       propertyPath: creditsScreen
       value: 

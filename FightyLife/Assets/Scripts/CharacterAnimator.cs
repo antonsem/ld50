@@ -12,6 +12,7 @@ namespace FightyLife
 		private readonly int _horizontalSpeed = Animator.StringToHash("HorizontalSpeed");
 		private readonly int _attack = Animator.StringToHash("Attack");
 		private readonly int _hurt = Animator.StringToHash("Hurt");
+		private readonly int _dead = Animator.StringToHash("Dead");
 
 
 		public void SetVerticalVelocity(float velocity)
@@ -46,6 +47,11 @@ namespace FightyLife
 		{
 			ResetAttack();
 			anim.SetTrigger(_hurt);
+		}
+
+		public void SetDeath()
+		{
+			anim.SetBool(_dead, true);
 		}
 	}
 }
