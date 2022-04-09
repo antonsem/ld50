@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace FightyLife
 {
 	public class ExclamationMark : MonoBehaviour
 	{
-		[SerializeField] private SpriteRenderer regular;
-		[SerializeField] private SpriteRenderer full;
-		[SerializeField] private RectTransform mask;
-		[SerializeField] private Vector2 startPos;
-		[SerializeField] private Vector2 endPos;
+		[SerializeField] private Image regular;
+		[SerializeField] private Image full;
+		[SerializeField] private float fullPercentage = 0.75f;
 
 		public void SetColor(Color color)
 		{
@@ -20,7 +19,7 @@ namespace FightyLife
 		{
 			regular.gameObject.SetActive(progress > 0);
 			full.gameObject.SetActive(progress >= 1);
-			mask.localPosition = Vector2.Lerp(startPos, endPos, progress);
+			regular.fillAmount = progress * fullPercentage;
 		}
 	}
 }

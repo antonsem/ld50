@@ -23,6 +23,7 @@ namespace FightyLife
 		[SerializeField] private Transform[] hitPositions;
 		[SerializeField] private AudioClip[] hit;
 		[SerializeField] private AudioClip death;
+		[SerializeField] private float pushForce = 20f;
 
 
 		private Player _player;
@@ -165,10 +166,11 @@ namespace FightyLife
 		{
 			var dir = Vector2.zero;
 			var eyesPosition = eyes.position;
-			var rayDirection = (_player.transform.position - eyesPosition).normalized;
+			var rayDirection = _player.Center - eyesPosition;
 
 			var gotHit = Physics2D.Raycast(eyesPosition, rayDirection, visionDistance, visibleObjects);
 
+			Debug.DrawLine(eyesPosition, eyesPosition + rayDirection.normalized * visionDistance, Color.red, 1f);
 			if (!gotHit)
 			{
 				return dir;
@@ -275,6 +277,20 @@ namespace FightyLife
 
 			var color = healthGradient.Evaluate((float)health / _fullHealth);
 			SetColors(color);
+		}
+
+		public void Push(Vector3 origin)
+		{
+			if (!enabled)
+			{
+				return;
+			}
+
+			var distance = (transform.position - origin).magnitude;
+			_stunTime = Mathf.Clamp(1 / distance, 0.5f, 1f);
+			var dir = (transform.position - origin + Vector3.down * 0.5f).normalized;
+			var force = dir * pushForce / distance;
+			movement.Push(force);
 		}
 	}
 }

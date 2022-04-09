@@ -8,6 +8,8 @@ namespace FightyLife
 		[SerializeField] private LayerMask mask;
 		[SerializeField] private float reach = 0.2f;
 
+		public Vector3 Origin => weaponCol.transform.position;
+		
 		public IHittable CheckForHit(float direction)
 		{
 			if (Mathf.Approximately(direction, 0))

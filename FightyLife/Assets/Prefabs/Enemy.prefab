@@ -287,7 +287,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.01}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -298,7 +298,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 1}
+  m_Size: {x: 0.4, y: 0.98}
   m_EdgeRadius: 0
 --- !u!1 &7283468928696346675
 GameObject:
@@ -487,6 +487,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 556d36b1410b3d548942f9b4705afa94, type: 3}
   - {fileID: 8300000, guid: 2d094a4fd392d46499e5bec08de17fff, type: 3}
   death: {fileID: 8300000, guid: 38a15a2582d14fd43b858763f5669c28, type: 3}
+  pushForce: 20
 --- !u!114 &8300460770442464360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,6 +623,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 759498571080563515}
     m_Modifications:
+    - target: {fileID: 2544586758831857952, guid: 95d946145bc869d4794dde3f271820bf, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544586758831857952, guid: 95d946145bc869d4794dde3f271820bf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.34509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544586758831857952, guid: 95d946145bc869d4794dde3f271820bf, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6012391667209132551, guid: 95d946145bc869d4794dde3f271820bf, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -721,6 +734,18 @@ PrefabInstance:
     - target: {fileID: 8009999918870013599, guid: 95d946145bc869d4794dde3f271820bf, type: 3}
       propertyPath: m_Name
       value: Warning
+      objectReference: {fileID: 0}
+    - target: {fileID: 8493068992238327013, guid: 95d946145bc869d4794dde3f271820bf, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8493068992238327013, guid: 95d946145bc869d4794dde3f271820bf, type: 3}
+      propertyPath: m_Color.g
+      value: 0.34509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 8493068992238327013, guid: 95d946145bc869d4794dde3f271820bf, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8794337012675332880, guid: 95d946145bc869d4794dde3f271820bf, type: 3}
       propertyPath: m_Color.b

@@ -8,5 +8,6 @@ namespace FightyLife
 		public static Action<Vector3, int> EnemyDead;
 		public static Action<Vector3, int> PlayerDead;
 		public static Action<Vector3, int, int> Hit;
+		public static Action PlayerRage;
 	}
 }

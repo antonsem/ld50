@@ -31,7 +31,7 @@ namespace FightyLife
 
 		private void OnEnemyDeath(Vector3 pos, int dir)
 		{
-			_enemiesToSpawn += 2;
+			_enemiesToSpawn = _enemiesToSpawn == 0 ? score.Score + 1 : _enemiesToSpawn + 1;
 
 			if (_spawningMultiple != null)
 			{
@@ -80,7 +80,7 @@ namespace FightyLife
 				}
 
 				_enemyPool[i].transform.position = spawnPoints[spawnIndex].position;
-				_enemyPool[i].Resurrect(baseHealth + score.Score * 2);
+				_enemyPool[i].Resurrect(baseHealth);
 				yield break;
 			}
 

@@ -80,7 +80,7 @@ namespace FightyLife
 			{
 				AudioPlayer.PlayOneShot(landSound, 0.1f, 0.25f, 0.15f);
 			}
-			
+
 			IsGrounded = hit;
 
 			if (!hit)
@@ -93,7 +93,14 @@ namespace FightyLife
 			{
 				rigid.position = new Vector2(rigid.position.x, hit.point.y);
 			}
+
 			Velocity = new Vector2(Velocity.x, 0);
+		}
+
+		public void Push(Vector3 velocity)
+		{
+			Stop();
+			Velocity = velocity;
 		}
 
 		private void FixedUpdate()

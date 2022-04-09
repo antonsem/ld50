@@ -18,10 +18,16 @@ namespace FightyLife
 		[SerializeField] private Transform[] hitPositions;
 		[SerializeField] private AudioClip[] hit;
 		[SerializeField] private AudioClip death;
+		[SerializeField] private AudioClip exclamationSound;
+		[SerializeField] private AudioClip nopeSound;
+		[SerializeField] private LayerMask enemyMask;
+		[SerializeField] private Transform center;
 
 
 		[Header("Stats")]
 		[SerializeField] private float dashCooldown = 0.25f;
+
+		public Vector3 Center => center.position;
 
 		public bool IsBreakingOut => _breakoutCoroutine != null;
 
@@ -98,6 +104,7 @@ namespace FightyLife
 			{
 				_hitCount = 0;
 				exclamation.SetProgress(0);
+				AudioPlayer.PlayOneShot(nopeSound, 0.2f, 0.05f, 0.05f);
 			}
 
 			Hit();
@@ -121,15 +128,15 @@ namespace FightyLife
 
 			var breakable = weapon.CheckForHit(movement.Velocity.x * Time.deltaTime);
 			breakable?.Hit(1, attack - 1, weapon.transform.position.x);
-			var hit = breakable != null;
+			var didHit = breakable != null;
 
-			if (hit)
+			if (didHit)
 			{
 				movement.Stop();
 				animator.SetAttack(attack);
 			}
 
-			_canHit = !hit;
+			_canHit = !didHit;
 		}
 
 		private void Dash(bool canDash, Vector2 input)
@@ -153,6 +160,7 @@ namespace FightyLife
 
 		private IEnumerator BreakoutCoroutine(float breakoutIn = 0.3f)
 		{
+			AudioPlayer.PlayOneShot(exclamationSound, 0.2f, 0.1f, 0.1f);
 			exclamation.SetProgress(1);
 			var input = Vector2.zero;
 
@@ -175,6 +183,37 @@ namespace FightyLife
 				? _lastDashTime = Time.time + 0.1f
 				: 0;
 
+			if (_lastDashTime <= 0)
+			{
+				var isHitting = Mathf.Abs(input.x) > 0;
+				Enemy closestEnemy = null;
+
+				if (isHitting)
+				{
+					var hit2D = Physics2D.Raycast(weapon.Origin, input, 2, enemyMask);
+
+					if (hit2D)
+					{
+						hit2D.transform.TryGetComponent(out closestEnemy);
+					}
+				}
+
+				Events.PlayerRage?.Invoke();
+				var enemies = FindObjectsOfType<Enemy>();
+
+				foreach (var enemy in enemies)
+				{
+					if (enemy != closestEnemy)
+					{
+						enemy.Push(transform.position + Vector3.down * 0.25f);
+					}
+				}
+			}
+			else
+			{
+				AudioPlayer.PlayOneShot(nopeSound, 0.2f, 0.05f, 0.05f);
+			}
+
 			exclamation.SetProgress(0);
 			_breakoutCoroutine = null;
 		}
@@ -186,8 +225,9 @@ namespace FightyLife
 			{
 				_hitCount++;
 
-				if (_hitCount > 1 && Random.Range(_hitCount, _hitCount + 3.0f) < _hitCount + 1 &&
-				    _breakoutCoroutine == null)
+				var probability = Random.Range(_hitCount / 5f, 1);
+
+				if (_hitCount > 1 && probability > 0.75f && _breakoutCoroutine == null)
 				{
 					_breakoutCoroutine = BreakoutCoroutine(1);
 					StartCoroutine(_breakoutCoroutine);
@@ -211,10 +251,17 @@ namespace FightyLife
 				AudioPlayer.PlayOneShot(death, 0.25f, 0.25f);
 				animator.SetDeath();
 				Events.PlayerDead?.Invoke(transform.position, rotation > 0 ? 1 : -1);
+
+				if (_breakoutCoroutine != null)
+				{
+					StopCoroutine(_breakoutCoroutine);
+					exclamation.SetProgress(0);
+				}
+
 				enabled = false;
 			}
 
-			_lastDashTime = Time.time + 0.1f;
+			_lastDashTime = Time.time + 0.15f;
 			animator.SetHurt();
 			AudioPlayer.PlayOneShot(hit.GetRandom(), 1, 0.25f, 0.5f);
 		}

@@ -34,6 +34,7 @@ Transform:
   - {fileID: 342590046729754686}
   - {fileID: 2657484537949703185}
   - {fileID: 8762911250288976700}
+  - {fileID: 570657860808771211}
   m_Father: {fileID: 392103275226511541}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -228,7 +229,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.01}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -239,7 +240,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 1}
+  m_Size: {x: 0.4, y: 0.98}
   m_EdgeRadius: 0
 --- !u!1 &5180887653372741247
 GameObject:
@@ -299,6 +300,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.25}
   m_EdgeRadius: 0
+--- !u!1 &5347302096249297782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 570657860808771211}
+  m_Layer: 6
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &570657860808771211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5347302096249297782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1649920718014660959}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7625895129077982771
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,6 +430,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 556d36b1410b3d548942f9b4705afa94, type: 3}
   - {fileID: 8300000, guid: 2d094a4fd392d46499e5bec08de17fff, type: 3}
   death: {fileID: 8300000, guid: 38a15a2582d14fd43b858763f5669c28, type: 3}
+  exclamationSound: {fileID: 8300000, guid: 178370f5f70b4ac44a2fc45f76202e1a, type: 3}
+  nopeSound: {fileID: 8300000, guid: 5f1338d74f55d7f44945cae692d3e85d, type: 3}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 128
+  center: {fileID: 570657860808771211}
   dashCooldown: 0.35
 --- !u!114 &8025094424112920076
 MonoBehaviour:
